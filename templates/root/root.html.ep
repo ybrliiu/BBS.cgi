@@ -1,0 +1,63 @@
+<div class="bg-success">
+  <div class="container text-center">
+    <h1 class="title">BBS</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row padding-top-20">
+    <div class="col md-5">
+      <form method="post" action="<%= url_for('/add-thread') %>">
+        <label>名前</label>
+        <input class="form-control" name="name" size="50" type="text">
+        <label>mail</label>
+        <input class="form-control" name="mail" size="50" type="text">
+        <label>title</label>
+        <input class="form-control" name="title" size="50" type="text">
+        <label>本文</label>
+        <textarea class="form-control" name="message" rows="6" cols="70"></textarea>
+        <input class="btn btn-empty" type="submit" value="送信">
+      </form>
+    </div>
+
+    <div class="col md-7">
+
+   % for my $thread (@$threads) {
+      <div class="thread">
+        <div class="title"><%= $thread->{title} %></div>
+        <div class="status">
+          投稿者:<%= $thread->{name} %>　<%= $thread->{time} %>
+        </div>
+        <div class="message">
+          <%= $thread->{message} %>
+        </div>
+        <div class="submit-btn">
+          <a class="btn btn-empty" href="<%= url_for("/reply?thread-id=$thread->{id}") %>">返信</a>
+        </div>
+      % my @replys = BBS::Model::Reply->new($thread->{id})->get();
+      % for my $reply (@{ $thread->{replys} }) {
+        <div class="reply">
+          <div class="status">
+            投稿者:<%= $reply->{name} %>　<%= $reply->{time} %>
+          </div>
+          <div class="message">
+            <%= $reply->{message} %>
+          </div>
+        </div>
+      % }
+      </div>
+   % }
+
+  </div>
+
+  <div class="row padding-top-20">
+    <div class="col md-12 pagenation">
+    % for my $page (0 .. $max_page) {
+      <a class="btn <%== $page == $current_page ? 'btn-light' : '' %>" href="<%= url_for("/?page=$page") %>">
+        <%= $page %>
+      </a>
+    % }
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,27 @@
+<div class="bg-success">
+  <div class="container text-center">
+    <h1 class="title">返信</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row padding-top-20">
+    <div class="col md-5">
+      <form method="post" action="<%= url_for('/reply/add-reply') %>">
+        <input type="hidden" name="thread-id" value="<%= $thread_id %>">
+        <label>名前</label>
+        <input class="form-control" name="name" size="50" type="text">
+        <label>mail</label>
+        <input class="form-control" name="mail" size="50" type="text">
+        <label>本文</label>
+        <textarea class="form-control" name="message" rows="6" cols="70"></textarea>
+        <input class="btn btn-empty" type="submit" value="送信">
+      </form>
+      <br>
+      <a class="btn btn-empty" href="<%= url_for('/') %>">bbsに戻る</a>
+    </div>
+
+    <div class="col md-7">
+    </div>
+  </div>
+</div>

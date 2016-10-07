@@ -1,0 +1,4 @@
+<pre>
+  投稿完了
+  <a href="<%= url_for('/') %>">bbsに戻る</a>
+</pre>

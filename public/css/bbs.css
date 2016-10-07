@@ -1,0 +1,65 @@
+
+.error {
+  color: #FF0000;
+  font-weight: bold;
+}
+
+#result {
+  font-family: "monospace";
+}
+
+.title{
+  font-size: 1.5em;
+	padding-top: 14px;
+}
+
+.thread {
+  margin-bottom: 20px;
+  padding: 7.5px;
+  background-color: #EEEEEE;
+  border-radius: 3px;
+  box-shadow: 4px 4px rgba(0, 0, 0, 0.4);
+}
+
+.thread .title {
+  font-size: 18px;
+  color: #F6F6F6;
+  padding: 5px;
+  background-color: #64B8FB;
+}
+
+.thread .status {
+  padding: 3px;
+}
+
+.thread .message {
+  border: 1px #BBB solid;
+  padding: 7.5px;
+  background-color: #FCFCFC;
+  border-radius: 3px;
+}
+
+.submit-btn {
+  text-align: right;
+}
+
+.submit-btn a {
+  margin: 10px 0;
+}
+
+.reply {
+  background-color: #CCC;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px #BBB solid;
+  border-radius: 3px;
+}
+
+.pagenation {
+  text-align: center;
+}
+
+.pagenation a {
+  min-width: 40px;
+}
+
