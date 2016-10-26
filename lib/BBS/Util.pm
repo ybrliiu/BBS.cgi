@@ -6,14 +6,15 @@
   use Cwd 'getcwd';
   use Encode qw/encode_utf8 decode_utf8/;
   use Exporter 'import';
-  our @EXPORT_OK = qw/project_root_dir config_file_path get_log save_log date_time remove_indention print_utf8 request_uri url_for/;
+  our @EXPORT_OK = qw/project_root_dir load_config get_log save_log date_time remove_indention print_utf8 request_uri url_for/;
 
   sub project_root_dir {
     return getcwd() . '/';
   }
 
-  sub config_file_path {
-    return project_root_dir() . 'etc/config/';
+  sub load_config {
+    my ($file_name) = @_;
+    return do(project_root_dir() . 'etc/config/' . $file_name);
   }
 
   sub get_log {
@@ -32,6 +33,13 @@
     seek($fh, 0, 0);
     print $fh map { encode_utf8 $_ } @$lines;
     close($fh);
+  }
+
+  sub get_data {
+    my ($file_name) = @_;
+  }
+
+  sub save_data {
   }
 
   sub date_time {

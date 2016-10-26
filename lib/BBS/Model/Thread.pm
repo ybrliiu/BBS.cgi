@@ -3,12 +3,12 @@
   
   use BBS;
   use Carp qw/croak/;
-  use BBS::Util qw/date_time remove_indention config_file_path get_log save_log/;
+  use BBS::Util qw/date_time remove_indention load_config get_log save_log/;
   use List::Util qw/max/;
 
   use constant DEFAULT_THREAD_NUM => 5;
 
-  my $config = do(config_file_path() . 'app.conf');
+  my $config = load_config('app.conf');
 
   sub get {
     my ($class, $page, $num) = @_;

@@ -4,12 +4,12 @@
   use BBS;
   use Class::Accessor::Lite (new => 0);
   use Carp qw/croak/;
-  use BBS::Util qw/date_time remove_indention config_file_path get_log save_log/;
+  use BBS::Util qw/date_time remove_indention load_config get_log save_log/;
   use List::Util qw/max/;
 
   Class::Accessor::Lite->mk_ro_accessors(qw/id/);
 
-  my $config = do(config_file_path() . 'app.conf');
+  my $config = load_config('app.conf');
 
   sub new {
     my ($class, $id) = @_;

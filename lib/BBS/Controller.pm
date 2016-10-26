@@ -6,7 +6,7 @@
 
   use HTML::Escape;
   use Mojo::Template;
-  use BBS::Util qw/project_root_dir print_utf8 url_for/;
+  use BBS::Util qw/project_root_dir load_config print_utf8 url_for/;
   use Encode qw/encode_utf8 decode_utf8/;
 
   sub new {
@@ -17,6 +17,14 @@
       map { $_ => escape_html(decode_utf8 $self->param($_)) } $self->param,
     };
     return bless $self, $class;
+  }
+
+  {
+    my $config = {};
+    sub config {
+      return $config if %$config;
+      $config = load_config('app.conf');
+    }
   }
 
   sub param {

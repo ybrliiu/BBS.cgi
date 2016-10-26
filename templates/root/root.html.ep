@@ -26,7 +26,13 @@
       <div class="thread">
         <div class="title"><%= $thread->{title} %></div>
         <div class="status">
-          投稿者:<%= $thread->{name} %>　<%= $thread->{time} %>
+          投稿者:
+          % if ($thread->{mail}) {
+            <a href="mailto:<%= $thread->{mail} %>"><%= $thread->{name} %></a>
+          % } else {
+            <%= $thread->{name} %>
+          % }
+          　<%= $thread->{time} %>
         </div>
         <div class="message">
           <%= $thread->{message} %>
@@ -38,7 +44,13 @@
       % for my $reply (@{ $thread->{replys} }) {
         <div class="reply">
           <div class="status">
-            投稿者:<%= $reply->{name} %>　<%= $reply->{time} %>
+            投稿者:
+          % if ($reply->{mail}) {
+            <a href="mailto:<%= $reply->{mail} %>"><%= $reply->{name} %></a>
+          % } else {
+            <%= $reply->{name} %>
+          % }
+          　<%= $reply->{time} %>
           </div>
           <div class="message">
             <%= $reply->{message} %>

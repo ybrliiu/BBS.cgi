@@ -17,10 +17,14 @@
     my ($self) = @_;
 
     my %errors;
-    $errors{'thread-id'} = "スレッドIDがありません"                        unless $self->param('thread-id');
-    $errors{name}        = "名前は0文字以上10文字以下で入力してください"   if $self->length('name') < 1 || $self->length('name') > 10;
-    $errors{mail}        = "メールは20文字以下で入力してください"          if $self->length('mail') > 20;
-    $errors{message}     = "本文は0文字以上1000文字以下で入力してください" if $self->length('message') < 1 || $self->length('message') > 1000;
+    my %conf = %{ $self->config->{app} };
+    $errors{'thread-id'} = "スレッドIDがありません" unless $self->param('thread-id');
+    $errors{name} = "名前は$conf{name_len_min}文字以上$conf{name_len_max}文字以下で入力してください"
+      if $self->length('name') < $conf{name_len_min} || $self->length('name') > $conf{name_len_max};
+    $errors{mail} = "メールは$conf{mail_len_max}文字以下で入力してください"
+      if $self->length('mail') > $conf{mail_len_max};
+    $errors{message} = "本文は1文字以上$conf{message_len_max}文字以下で入力してください"
+      if $self->length('message') < 1 || $self->length('message') > $conf{message_len_max};
 
     return $self->render_error(\%errors) if %errors;
 
@@ -33,7 +37,8 @@
     if (my $e = $@) {
       $self->render_error($e);
     } else {
-      $self->render('reply/add_reply.html.ep');
+      $self->redirect_to('/');
+      # $self->render('reply/add_reply.html.ep');
     }
 
   }
